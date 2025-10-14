@@ -16,10 +16,16 @@ type Book struct {
 	Author   string
 	Year int
 	IsIssued bool
-
+	ReaderId *int
 }
 
 
+type Library struct {	Books map[int]*Book
+	Readers map[int]*Reader
+
+}
+
+ 
 //Выводит в консоль информацию о читателе
 func (r Reader) DisplayReader() {
 	fmt.Printf("Читатель: %s %s (ID: %d)\n", r.FirstName,r.LastName,r.ID)
@@ -38,26 +44,35 @@ func (r Reader) String() string{
 	} else {
 		status = "Не активен"
 	}
-	return fmt.Sprintf("Пользователь %s %s, ID: %d, пользователь:%",r.FirstName,r.LastName,r.ID,status)
+	return fmt.Sprintf("Пользователь %s %s, ID: %d, пользователь:%s",r.FirstName,r.LastName,r.ID,status)
 }
 
 func (b Book) String() string {
-	return fmt.Sprintf(`"%s (%s, %d)"`, b.Title, b.Author, b.Year)
+
+	status := "В библиотеке"
+	if b.IsIssued && b.ReaderId != nil {
+		status = fmt.Sprintf("На руках у читателя с ID: %d", *b.ReaderId)
+	}
+	return fmt.Sprintf(`"%s (%s, %d), Статус: %s"`, b.Title, b.Author, b.Year, status)
 }
 
-func (b *Book) IssueBook() (r Reader) {
+func (r* Reader) AssignBook(b* Book){
+	fmt.Printf("Читатиель %s %s взял книгу '%s' (%s, %d)\n", r.FirstName,r.LastName,b.Title, b.Author, b.Year)
+}
+
+func (b *Book) IssuesBook(r *Reader) {
 	if b.IsIssued {
 		fmt.Printf("Книга %s уже кому-то выдана", b.Title)
 		return
 	}   
 	  if !r.IsActive {
-		fmt.Printf("Читатель %s %s не активен и не      может получить книгу.", r.FirstName, r.LastName)
+		fmt.Printf("Читатель %s %s не активен и не может получить книгу.", r.FirstName, r.LastName)
 		return
 	}
 
 	b.IsIssued = true
+	b.ReaderId = &r.ID
 	fmt.Printf("Книга %s была выдана\n", b.Title)
-	return
 }
 
 func (b *Book) ReturnBook() {
@@ -65,6 +80,8 @@ func (b *Book) ReturnBook() {
 		fmt.Printf("Книга %s уже в библиотеке", b.Title)
 		return
 	}
+	
 	b.IsIssued = false
+	b.ReaderId = nil
 	fmt.Printf("Книга %s возвращена в библиотеку\n", b.Title)
 }
