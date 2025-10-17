@@ -17,8 +17,8 @@ type SMSNotifier struct{
 }
 
 func (e EmailNotifier) Notify(message string){
-	fmt.Printf("Отправляю email на [%s]: '[%s]'.", e.EmailAddress, message)
+	fmt.Printf("\n Отправляю email на [%s]: '[%s]'.", e.EmailAddress, message)
 }
 func (e SMSNotifier) Notify(message string){
-	fmt.Printf("Отправляю SMS на номер [%d]: '[%s]'.", e.PhoneNumber, message)
+	fmt.Printf("\n Отправляю SMS на номер [%d]: '[%s]'.", e.PhoneNumber, message)
 }

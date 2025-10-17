@@ -38,6 +38,17 @@ book1.IssuesBook(&reader2)
 	fmt.Println(user1)
 	fmt.Println("---")
 	book1.IssuesBook(&user1)
-	
+
+	email1 := EmailNotifier{
+		EmailAddress: "nikededa2@gmail.com",
+	}
+	phone1 := SMSNotifier{
+		PhoneNumber: 7988888888,
+	}
+	notifier := []Notifier{email1,phone1}
+
+	for _, notifitacions := range notifier{
+		notifitacions.Notify("\n Ваша книга просрочена!")
+	}
 
 }
