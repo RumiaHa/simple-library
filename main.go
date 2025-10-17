@@ -38,6 +38,6 @@ book1.IssuesBook(&reader2)
 	fmt.Println(user1)
 	fmt.Println("---")
 	book1.IssuesBook(&user1)
-
+	
 
 }
