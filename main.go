@@ -20,7 +20,10 @@ func main() {
 	    myLibrary.AddBook("Мастер и Маргарита", "Михаил Булгаков", 1967)
 
     fmt.Println("\n--- Библиотека готова к работе ---")
-    fmt.Println("Количество читателей:", len(myLibrary.Readers))
-    fmt.Println("Количество книг:", len(myLibrary.Books))
+    fmt.Println("\nКоличество читателей:", len(myLibrary.Readers))
+    fmt.Println("\nКоличество книг:", len(myLibrary.Books))
 
+
+	fmt.Println("\n Список всех книг в библиотеке:")
+	myLibrary.ListAllBooks()
 }
