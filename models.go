@@ -20,10 +20,47 @@ type Book struct {
 }
 
 
-type Library struct {	Books map[int]*Book
-	Readers map[int]*Reader
+type Library struct {	
+	Books []*Book
+	Readers []*Reader
 
+	lastBookID int
+	LastReaderID int
 }
+
+func (lib *Library) AddReader(firstName,lastName string) *Reader{
+	lib.LastReaderID++
+
+	newReader := &Reader{
+		ID: lib.LastReaderID,
+		FirstName: firstName,
+		LastName: lastName,
+		IsActive: true,
+	}
+
+
+	lib.Readers = append(lib.Readers,newReader)
+	fmt.Printf("Зарегистрирован новый читатель: %s\n", newReader)
+	return newReader
+}
+
+func (lib *Library) AddBook(title, author string, year int) *Book{
+	lib.lastBookID++
+
+	newBook := &Book{
+		ID: lib.lastBookID,
+		Title: title,
+		Author: author,
+		Year: year,
+		IsIssued: false,
+	}
+
+	lib.Books = append(lib.Books, newBook)
+	fmt.Printf("Добавлена новая книга: %s\n", newBook)
+	return newBook
+}
+
+
 
  
 //Выводит в консоль информацию о читателе
