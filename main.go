@@ -19,6 +19,10 @@ func main() {
 
 	    myLibrary.AddBook("Мастер и Маргарита", "Михаил Булгаков", 1967)
 
+
+
+
+		
     fmt.Println("\n--- Библиотека готова к работе ---")
     fmt.Println("\nКоличество читателей:", len(myLibrary.Readers))
     fmt.Println("\nКоличество книг:", len(myLibrary.Books))
@@ -26,4 +30,27 @@ func main() {
 
 	fmt.Println("\n Список всех книг в библиотеке:")
 	myLibrary.ListAllBooks()
+
+
+
+fmt.Println("---Тестируем выдачу книг---")
+//Выдаем книгу 1 читателю 1
+err := myLibrary.IssueBookToReader(1, 1)
+if err != nil {
+	fmt.Println("Ошибка выдачи", err)
+}
+
+//Проверить статус книги после выдачи
+book, _ := myLibrary.FindBookByID(1)
+if book != nil {
+	fmt.Println("Статус книги после выдачи:", book)
+}
+
+//Попытка выдать несуществующую книгу
+err = myLibrary.IssueBookToReader(99, 1)
+if err != nil {
+	fmt.Println("Ожидаемая ошибка:", err)
+}
+
+
 }
