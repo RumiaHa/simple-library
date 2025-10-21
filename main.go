@@ -53,4 +53,16 @@ if err != nil {
 }
 
 
+key := map[string]int {
+    "PORT" : 1,
+}
+
+
+key1 := map[string]int {
+    "NOPORT" : 1,
+}
+
+key.GetPortFromConfig()
+
+
 }
