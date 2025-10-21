@@ -164,13 +164,21 @@ func (b *Book) IssuesBook(r *Reader) {
 	fmt.Printf("Книга %s была выдана\n", b.Title)
 }
 
-func (b *Book) ReturnBook() {
+func (b *Book) ReturnBook() error {
 	if !b.IsIssued {
-		fmt.Printf("Книга %s уже в библиотеке", b.Title)
-		return
+		return fmt.Errorf("книга '%s' и так в библиотеке", b.Title)
 	}
 	
 	b.IsIssued = false
 	b.ReaderId = nil
 	fmt.Printf("Книга %s возвращена в библиотеку\n", b.Title)
+	return nil
+}
+
+func (lib *Library) ReturnBook(bookID int) error{
+	book, err := lib.FindBookByID(bookID)
+	if err != nil {
+		return err
+	}
+	return book.ReturnBook()
 }
