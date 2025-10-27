@@ -107,11 +107,6 @@ func (lib *Library) IssueBookToReader(bookID int, readerID int) error {
 	return nil
 }
 
-func (lib *Library) ListAllBooks() {
-	for _, book := range lib.Books {
-		fmt.Println(book.String())
-	}
-}
 
 func (r *Reader) Deactivate() {
 	r.IsActive = false

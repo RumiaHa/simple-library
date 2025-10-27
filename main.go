@@ -22,9 +22,6 @@ func main() {
     fmt.Println("Количество читателей:", len(myLibrary.Readers))
     fmt.Println("Количество книг:", len(myLibrary.Books))
 
-    fmt.Println("\n--- Список всех книг в библиотеке ---")
-    myLibrary.ListAllBooks()
-
     // Сценарий 1: Успешная выдача книги
     fmt.Println("\n--- Сценарий 1: Успешная выдача книги ---")
     err := myLibrary.IssueBookToReader(1, 1)
